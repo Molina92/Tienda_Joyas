@@ -4,6 +4,10 @@ const format = require("pg-format");
 const prepareHATEOAS = (joyas) => {
     const results = joyas.map((j) => ({
         name: j.nombre,
+        category: j.categoria,
+        metal: j.metal,
+        price: j.precio,
+        stock: j.stock,
         href: `/joyas/${j.id}`,
     }));
     const total = joyas.length;
@@ -36,12 +40,9 @@ const getJoyas = async ({ limit = 10, order_by = "id_ASC", page = 1 }) => {
         );
 
         const { rows: results, rowCount: totalJoyas } = await DB.query(SQLQuery);
+        const { rows: [{ total_stock: stockTotal }] } = await DB.query(SQLSubQueryStock);
         const { rowCount: count } = await DB.query('SELECT * FROM inventario');
-        const result = await DB.query(SQLSubQueryStock);
-        const stockTotal = result.rows[0].total_stock;
-
-        // Preparar respuesta según estructura de datos HATEOAS
-        const HATEOAS = prepareHATEOAS(results);
+        const { results: HATEOAS } = prepareHATEOAS(results);
 
         return {
             totalJoyas,
