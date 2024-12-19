@@ -17,10 +17,10 @@ const getJoyas = async ({ limit = 10, order_by = "id_ASC", page = 1 }) => {
     try {
         const validCampos = ['id', 'nombre', 'precio', 'stock', 'categoria', 'metal'];
         const validDirecciones = ['ASC', 'DESC'];
-
         const [campo, direccion] = order_by.split("_");
+
         if (!validCampos.includes(campo) || !validDirecciones.includes(direccion)) {
-            throw new Error('Parámetros de ordenamiento inválidos.');
+            throw new Error('Invalid_Query_Parameters');
         }
 
         const offset = Math.abs((page - 1) * limit);
@@ -54,7 +54,15 @@ const getJoyas = async ({ limit = 10, order_by = "id_ASC", page = 1 }) => {
 
 const getJoyasFiltered = async ({ limit = 10, order_by = "id_ASC", page = 1, precio_min = '', precio_max = '', categoria = '', metal = '' }) => {
     try {
+        
+        const validCampos = ['id', 'nombre', 'precio', 'stock', 'categoria', 'metal'];
+        const validDirecciones = ['ASC', 'DESC'];
         const [campo, direccion] = order_by.split("_");
+
+        if (!validCampos.includes(campo) || !validDirecciones.includes(direccion)) {
+            throw new Error('Invalid_Query_Parameters');
+        }
+
         const offset = Math.abs((page - 1) * limit);
 
         const SQLQuery = handleGetFilters({ limit, precio_min, precio_max, categoria, metal, campo, direccion, offset });
