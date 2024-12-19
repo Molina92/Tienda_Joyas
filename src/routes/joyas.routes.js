@@ -1,9 +1,10 @@
 const { Router } = require('express')
 const router = Router()
 
-const { handleGetJoyas } = require('../contollers/joyas.controller');
+const { handleGetJoyas, handleGetJoyasFiltered } = require('../contollers/joyas.controller');
 
 router.get("/", handleGetJoyas)
+router.get("/filtros", handleGetJoyasFiltered)
 
 // router.post("/", handleCreateViaje)
 // router.put("/:id", handleModificarViaje)
