@@ -3,7 +3,7 @@ module.exports = {
         id: 'jewelNotFound',
         statusCode: 404,
         message: 'Joya no encontrada',
-        description: 'No se encontraron joyas que coincidan con los parámetros de búsqueda proporcionados.',
+        description: 'No se encontraron joyas que coincidan con los parámetros de búsqueda proporcionados. Revise sus parametros de busqueda y verifique que sean correctos.'
     },
 
     Invalid_Query_Parameters: {

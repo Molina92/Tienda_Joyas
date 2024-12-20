@@ -1,17 +1,15 @@
-const errors = require('../helpers/errorsMessajes')
+const errors = require('../helpers/errorsMessajes');
 
 const errorMiddleware = (err, req, res, next) => {
-   
-    const errorDetails = errors[err.message] || errors['Server_Error']
-    
+    const errorDetails = errors[err.message] || errors['Server_Error'];
+
     const response = {
         id: errorDetails.id,
         message: errorDetails.message,
-        description: errorDetails.description
-    }
+        description: errorDetails.description,
+    };
 
-    res.status(errorDetails.statusCode).json(response)
+    res.status(errorDetails.statusCode).json(response);
+};
 
-}
-
-module.exports = errorMiddleware
+module.exports = errorMiddleware;
